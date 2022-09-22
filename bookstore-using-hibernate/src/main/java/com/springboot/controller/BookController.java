@@ -65,6 +65,8 @@ public class BookController {
 		bookService.deleteBook(id);
 		return new ResponseEntity<String>("Book solded successfully!.", HttpStatus.OK);
 	}
+	
+	// build get book by book name REST API
 } 
 
 

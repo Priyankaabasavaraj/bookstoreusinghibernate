@@ -9,6 +9,6 @@ public interface BookService {
 	List<Book> getAllBooks();
 	Book getBookById(long id);
 	void deleteBook(long id);
-//	Book getBookByBookName(String book_name);
+
 
 }

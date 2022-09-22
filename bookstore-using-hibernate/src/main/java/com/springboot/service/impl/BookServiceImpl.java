@@ -47,12 +47,6 @@ public class BookServiceImpl implements BookService {
 					new ResourceNotFoundException("Book","Id",id));	
 	}
 
-//	@Override
-//	public Book getBookByBookName(String book_name) {
-//		return bookRepository.findByBookName(book_name).orElseThrow(() ->
-//		new ResourceNotFoundException("Book","BookName",book_name));
-//	}
-
 	@Override
 	public void deleteBook(long id) {
 		
@@ -62,8 +56,4 @@ public class BookServiceImpl implements BookService {
 		bookRepository.deleteById(id);
 		
 	}
-
 }
-
-
-
