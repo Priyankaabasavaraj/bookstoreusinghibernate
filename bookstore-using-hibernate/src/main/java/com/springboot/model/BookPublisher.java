@@ -2,6 +2,9 @@ package com.springboot.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -11,8 +14,11 @@ import lombok.Data;
 	@Table(name="BookPublisher")
 	public class BookPublisher {
 		
-		@Column(name="PUBLISHER_ID")
+		@Id
+		@GeneratedValue(strategy = GenerationType.AUTO)
+		@Column(name = "PUBLISHER_ID",nullable = false)
 		private long publisherId;
+		
 		
 		@Column(name="PUBLISHER_NAME")
 		private String publisherName;

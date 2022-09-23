@@ -31,7 +31,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<Book> getAllBooks() {
-		return bookRepository.findAll();
+		return (List<Book>) bookRepository.findAll();
 	}
 	
 	@Override
@@ -56,4 +56,8 @@ public class BookServiceImpl implements BookService {
 		bookRepository.deleteById(id);
 		
 	}
+
+
+	
+	
 }

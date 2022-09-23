@@ -2,37 +2,59 @@ package com.springboot.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
 
-	@Data
-	@Entity
-	@Table(name="BookPublisherMapping")
 	
+@Data
+@Entity
+@Table(name="BookPublisherMapping")	
 public class BookPublisherMapping {
-		@Column(name="PUBLISHER_ID")
-		private long publisherId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "BOOK_PUBLISHER_ID",nullable = false)
+	private long bookmappingid;
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="PUBLISHER_ID",nullable=false)
+		private BookPublisher publisherId;
 		
-		@Column(name="BOOK_ID")
-		private long id;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="BOOK_ID",nullable=false)
+		private Book id;
 
-		public long getPublisherId() {
-			return publisherId;
-		}
+	public long getBookmappingid() {
+		return bookmappingid;
+	}
 
-		public void setPublisherId(long publisherId) {
-			this.publisherId = publisherId;
-		}
+	public void setBookmappingid(long bookmappingid) {
+		this.bookmappingid = bookmappingid;
+	}
 
-		public long getId() {
-			return id;
-		}
+	public BookPublisher getPublisherId() {
+		return publisherId;
+	}
 
-		public void setId(long id) {
-			this.id = id;
-		}
-		
+	public void setPublisherId(BookPublisher publisherId) {
+		this.publisherId = publisherId;
+	}
+
+	public Book getId() {
+		return id;
+	}
+
+	public void setId(Book id) {
+		this.id = id;
+	}
+
 		
 		
 }
