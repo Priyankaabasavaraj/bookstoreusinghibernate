@@ -1,6 +1,4 @@
-
 package com.springboot.controller;
-
 
 
 import java.util.List;
@@ -16,58 +14,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.model.Book;
-import com.springboot.service.BookService;
+import com.springboot.model.BookPublisher;
+import com.springboot.service.BookPublisherService;
 
 @RestController
 @RequestMapping("/api/BOOKSPUBLISHER")
 public class BookPublisherController {
-	
-	private BookPublisherService bookpublisherService;
 
-	public BookPublisherController(BookPublisherService BookPublisherService) {
+	private BookPublisherService bookService;
+
+	public BookPublisherController(BookPublisherService bookService) {
 		super();
-		this.BookPublisherService = BookPublisherService;
+		this.bookService = bookService;
 	}
 
 	// build create book REST API
 	@PostMapping()
-	public ResponseEntity<Book> saveBook(@RequestBody Book book) {
-		return new ResponseEntity<Book>(bookpublisherService.saveBook(book),HttpStatus.CREATED);
+	public ResponseEntity<BookPublisher> saveBookPublisher(@RequestBody BookPublisher book) {
+		return new ResponseEntity<BookPublisher>(bookService.saveBookPublisher(book),HttpStatus.CREATED);
 		
 	}
 	
 	// build get all book REST API
 	@GetMapping
-	public List<Book> getAllBooks(){
-		return bookpublisherService.getAllBooks();
+	public List<BookPublisher> getAllBooks(){
+		return bookService.getAllBooks();
 	}
 	
 	// build get book by id RRST API
 	// http://localhost:8080/api/books/1
-	@GetMapping("{id}")
-	public ResponseEntity<Book> getBookById(@PathVariable("id") long id){
-		return new ResponseEntity<Book>(bookpublisherService.getBookById(id), HttpStatus.OK);
+	@GetMapping("{publisherId}")
+	public ResponseEntity<BookPublisher> getBookByPublisherId(@PathVariable("publisherId") long publisherId){
+		return new ResponseEntity<BookPublisher>(bookService.getBookByPublisherId(publisherId), HttpStatus.OK);
 		
 	}
-	
-//	// build get book by book name RRST API
-//	@GetMapping("{book_name}")
-//	public ResponseEntity<Book> getBookByBookName(@PathVariable("book_name") String book_name){
-//		return new ResponseEntity<Book>(bookService.getBookByBookName(book_name), HttpStatus.OK);
-//	}
-	
-	// build delete book RRST API
-	// http://localhost:8080/api/books/1
-	@DeleteMapping("{id}")
-	public ResponseEntity<String> deleteBook(@PathVariable("id") long id){
-		
-		// delete book from DB
-		bookpublisherService.deleteBook(id);
-		return new ResponseEntity<String>("Book solded successfully!.", HttpStatus.OK);
-	}
-	
-	// build get book by book name REST API
-} 
 
+} 
 

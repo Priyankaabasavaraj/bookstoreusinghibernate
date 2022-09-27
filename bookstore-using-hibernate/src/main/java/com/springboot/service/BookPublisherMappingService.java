@@ -1,5 +1,13 @@
 package com.springboot.service;
 
-public interface BookPublisherMappingService {
+import java.util.List;
 
+import com.springboot.model.BookPublisherMapping;
+
+
+
+public interface BookPublisherMappingService {
+	BookPublisherMapping saveBookPublisherMapping(BookPublisherMapping book);
+	List<BookPublisherMapping> getAllBooks();
+	BookPublisherMapping getBookById(long bookmappingid);
 }
