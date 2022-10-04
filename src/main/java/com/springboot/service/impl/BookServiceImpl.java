@@ -8,10 +8,12 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.springboot.exception.ResourceNotFoundException;
 import com.springboot.model.Book;
+import com.springboot.model.Pagination;
 import com.springboot.repository.BookRepository;
 import com.springboot.service.BookService;
 
@@ -61,6 +63,19 @@ public class BookServiceImpl implements BookService {
 		
 	}
 
+
+	@Override
+	public Pagination<Book> findAllBook( Specification<Book> spec,org.springframework.data.domain.Pageable pageable) {
+		Page<Book> entity =bookRepository.findAll(spec,pageable);
+		    
+		//public PagedResponse(List<T> content, int page, int size, long totalElements, int totalPages, boolean last) {
+		//return new PagedResponse<>(entity.getContent(),entity.getNumber(),entity.getSize(),entity.getTotalElements(),entity.getTotalPages(),entity.isLast());
+		return new Pagination<>(entity.getContent(), entity.getNumber(), entity.getSize(),
+		        entity.getTotalElements(), entity.getTotalPages(), entity.isLast());
+		    
+	}
+}
+
 //	@Override
 //	public List<Book> findPaginated(int pageNo, int pageSize) {
 //		Pageable paging=PageRequest.of(pageNo-1, pageSize);
@@ -81,5 +96,7 @@ public class BookServiceImpl implements BookService {
 //	
 //		return bookRepository.findAll(org.framework.data.domain.sort.by(org.springframework.data.domain);
 //	}
-}
+	
+	
+	
 

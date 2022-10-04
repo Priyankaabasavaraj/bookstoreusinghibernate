@@ -88,26 +88,4 @@ public class  Pagination<T> {
         this.last = last;
     }
 
-    
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Pagination<Book> getHoliday(
-            @RequestParam(value = "holidayId", required =false) Integer holidayId,
-            @RequestParam(value = "holidayName", required = false) String holidayName,
-            @RequestParam(value = "date", required = false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date holidayDate,
-            @RequestParam(value = "keyword", required = false) String keyword,
-            @RequestParam(value = "page", defaultValue = "1", required = false) int page,
-            @RequestParam(value = "size", defaultValue = "0", required = false) int size,
-            @RequestParam(value = "sort", defaultValue = "createdDate", required = false) String sort,
-            @RequestParam(value = "order", defaultValue = "desc", required = false) String order,
-            @And({ 
-                @Spec(path = "holidayId", params = "holidayId", spec = Equal.class),
-                @Spec(path = "holidayName", params = "holidayName", spec = Equal.class),
-                @Spec(path = "holidayDate", params = "holidayDate", spec = Equal.class)}) 
-            Specification<Book> spec) {
-
-        Pageable pageable = (size != 0
-                ? Pagination.of(page - 1, size,order.trim().equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC,sort)
-                : Pageable.unpaged());
-        return service.findAllBooks(pageable, spec);
-    }
 }
